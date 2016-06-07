@@ -48,6 +48,13 @@ def handle_guess
     # make sure it is case insensitive
     guess = gets.chomp.downcase
 
+    # make sure to check that only one valid character was entered
+    while guess.size != 1 || guess.index(/[a-zA-Z]/) == nil do
+      puts "Please enter a single letter from the alphabet"
+      # make sure it is case insensitive
+      guess = gets.chomp.downcase
+    end
+
     # if the guess is not in the array of guessed letters then set break clause
     if @guessed_letters.find_index(guess) == nil
       guess_again = false
@@ -65,7 +72,6 @@ def display (word)
   system("clear") or system("cls")
   print "\n\n\n WORD = "
   word.each {|letter| print "#{letter} "};print "\n\n\n"
-  
   puts "Guesses left: #{GUESSES-@guesses}"
   puts "\nLetters guessed: #{@guessed_letters.join(',')}"
 end

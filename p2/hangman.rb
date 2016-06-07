@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+system("clear") or system("cls")
 
 =begin
   an update function might help
@@ -10,6 +11,7 @@ debug = false
 GUESSES = 10
 @guesses = 0
 @keep_cheating = true
+chosen_word = []
 
 # load the words file into an array
 words_array = File.readlines("words")
@@ -23,14 +25,16 @@ def handle_guess
 
   guess_again = false 
 
-  puts "Guess a letter"
+  puts "\n\nGuess a letter"
 
-  guess = gets.chomp
+  # make sure it is case insensitive
+  guess = gets.chomp.downcase
 
   # make sure to check that only one valid character was entered
   while guess.size != 1 || guess.index(/[a-zA-Z]/) == nil do
     puts "Please enter a single letter from the alphabet"
-    guess = gets.chomp
+    # make sure it is case insensitive
+    guess = gets.chomp.downcase
   end
 
   # check if the guess was already used
@@ -41,20 +45,29 @@ def handle_guess
   while guess_again == true
     #system("clear") or system("cls")
     puts "You already guessed that letter, please guess again"
-    guess = gets.chomp
+    # make sure it is case insensitive
+    guess = gets.chomp.downcase
 
+    # if the guess is not in the array of guessed letters then set break clause
     if @guessed_letters.find_index(guess) == nil
       guess_again = false
     end
   end
-
-  puts "\nYour guess was: #{guess}"
 
   # add the guess to the array of guessed letters
   @guessed_letters << guess
   # decrement the number of guesses
   @guesses += 1
   return guess
+end
+
+def display (word)
+  system("clear") or system("cls")
+  print "\n\n\n WORD = "
+  word.each {|letter| print "#{letter} "};print "\n\n\n"
+  
+  puts "Guesses left: #{GUESSES-@guesses}"
+  puts "\nLetters guessed: #{@guessed_letters.join(',')}"
 end
 
 puts "\nPlease enter how long you would like the word to be in the range 5-20"
@@ -77,18 +90,11 @@ the_word = Array.new(word_size, "_")
 
 system("clear") or system("cls")
 
-# call display here
-
-# print the word
-print "\n\n\n WORD = "
-the_word.each {|letter| print "#{letter} "}
-print "\n\n\n"
-
-
 winner = false
-
 # loop until the user doesn't have anymore guesses
 while @guesses < GUESSES do
+  # call display  
+  display (the_word)
 
   # this is a loop to keep cheating while we can
   if @keep_cheating == false
@@ -100,25 +106,28 @@ while @guesses < GUESSES do
     #   the mapping, if it would leave us with no elements then stop cheating
     if (words_array.map {|word| word if word.count("#{the_guess}") == 0}.compact.size > 0)
       words_array.map! {|word| word if word.count("#{the_guess}") == 0}.compact!
-      words_array.each {|word| puts word if debug == true}
+      # call display
+      display(the_word)
     else
       @keep_cheating = false
     end
   end
 
-=begin
-  # remove any words with the matching character
-  while (words_array.map {|word| word if word.count("#{handle_guess}") == 0}.compact.size > 0) do
-    puts "\nThe size of words_array is now: #{words_array.size}"
-    #words_array.map! {|word| word if word.count("#{handle_guess}") == 0}.compact!
-  end
-=end
-
   # after cheating is done just pick the first word in the array to use
   chosen_word = words_array[0]
   
-  next if chosen_word.chars.find_index(the_guess) == nil
-  the_word[chosen_word.chars.find_index(the_guess)] = the_guess
+  # if it is a wrong guess move to next iteration
+  if chosen_word.chars.find_index(the_guess) == nil
+    next
+  #
+  #
+  #              delete the following 2 lines if correct guesses use a turn
+  else
+    @guesses -= 1
+  end
+
+  # this sets the letter from "_" to the correct letter
+  chosen_word.bytes.each_index { |index| the_word[index] = the_guess if chosen_word[index] == the_guess }
 
   the_word.each {|letter| print "#{letter} "}
   puts
@@ -128,10 +137,15 @@ while @guesses < GUESSES do
     break
   end
 
-end
+end # out of guesses, finish game
+
+# call display
+display(the_word)
 
 if winner == true
-  puts "You are a winner"
+  puts "\nYou are a winner".upcase
 else
-  puts "Sorry you did not win this time, try again"
+  puts "\nSorry you did not win this time, try again"
 end
+
+puts "\nThe word was: #{chosen_word}\n\n\n"

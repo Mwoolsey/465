@@ -2,10 +2,6 @@
 
 system("clear") or system("cls")
 
-=begin
-  an update function might help
-=end
-
 debug = false
 
 GUESSES = 10
@@ -125,18 +121,14 @@ while @guesses < GUESSES do
   # if it is a wrong guess move to next iteration
   if chosen_word.chars.find_index(the_guess) == nil
     next
-  #
-  #
-  #              delete the following 2 lines if correct guesses use a turn
   else
+    # since the guess method increments guesses we have do decrement it
+    #   on a correct guess
     @guesses -= 1
   end
 
   # this sets the letter from "_" to the correct letter
   chosen_word.bytes.each_index { |index| the_word[index] = the_guess if chosen_word[index] == the_guess }
-
-  the_word.each {|letter| print "#{letter} "}
-  puts
 
   if the_word.find_index("_") == nil
     winner = true

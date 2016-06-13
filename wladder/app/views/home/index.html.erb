@@ -1,0 +1,25 @@
+<h1>Mark's Word Ladder Game</h1>
+<br>
+<pre style = font-family: Times><%="Start: #{@start_word}"%></pre>
+<%=form_tag(query_path, method: "get") do %>
+  <%=label_tag(:word1, "Step 1: ")%>
+  <%=text_field_tag(:word1)%>
+  <br>
+  <%=label_tag(:word2, "Step 2: ")%>
+  <%=text_field_tag(:word2)%>
+  <br>
+  <%=label_tag(:word3, "Step 3: ")%>
+  <%=text_field_tag(:word3)%>
+  <br>
+  <%=label_tag(:word4, "Step 4: ")%>
+  <%=text_field_tag(:word4)%>
+  <br>
+  <%=label_tag(:word5, "Step 5: ")%>
+  <%=text_field_tag(:word5)%>
+  <%=submit_tag("Submit")%>
+  <br>
+  <pre style = font-family: Times><%="End:   #{@end_word}"%></pre>
+  <%=hidden_field_tag(:start, @start_word)%>
+  <%=hidden_field_tag(:end, @end_word)%>
+<%end%>
+<br>

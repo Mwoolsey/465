@@ -1,0 +1,19 @@
+<h1>Results:</h1>
+<table border="1px">
+  <tr>
+    <td>Start:</td><td><%=@start%></td>
+  </tr>
+  <%counter=1%>
+  <%@user_words.each do |word|%>
+    <tr>
+      <td><%="Step #{counter}:"%></td><td><%=word%></td>
+    </tr>
+    <%counter += 1%>
+  <%end%>
+  <tr>
+    <td>End:</td><td><%=@end%></td>
+  </tr>
+</table>
+<br>
+<h2><%=@result%></h2>
+<%=link_to "Play Again!", root_path%>

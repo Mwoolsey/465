@@ -1,0 +1,10 @@
+<%=link_to "Search Page", root_path%>
+<br>
+<p><%="$ whois #{@query_text} returned"%></p>
+<br>
+<%@result.each do |line|%>
+  <%=line%>
+  <br>
+<%end%>
+<br>
+<%=link_to "Search Page", root_path%>

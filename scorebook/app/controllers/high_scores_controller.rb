@@ -1,5 +1,7 @@
 class HighScoresController < ApplicationController
 
+  before_action :set_high_score, only: [:show, :edit, :update, :destroy]
+
   # GET /high_scores
   def index
     @high_scores = HighScore.all
@@ -7,7 +9,7 @@ class HighScoresController < ApplicationController
 
   #GET /high_scores/1
   def show
-    @high_score = HighScore.find(params[:id])
+    set_high_score
   end
 
   #GET /high_scores/new
@@ -18,7 +20,7 @@ class HighScoresController < ApplicationController
 
   #POST /high_scores
   def create
-    @high_score = HighScore.new(params.require(:high_score).permit(:user,:game,:score))
+    @high_score = HighScore.new(high_score_params)
     if @high_score.save
       redirect_to @high_score, notice: 'High score was created successfully.'
     else
@@ -28,13 +30,13 @@ class HighScoresController < ApplicationController
 
   #GET /high_scores/1/edit
   def edit
-    @high_score = HighScore.find(params[:id])
+    set_high_score
   end
 
   #PATCH
   def update
-    @high_score = HighScore.find(params[:id])
-    if @high_score.update(params.require(:high_score).permit(:user,:game,:score))
+    set_high_score
+    if @high_score.update(high_score_params)
       redirect_to @high_score, notice: 'High score was updated successfully.'
     else
       render :edit
@@ -43,9 +45,17 @@ class HighScoresController < ApplicationController
 
   #DELETE /high_scores/1
   def destroy
-    @high_score = HighScore.find(params[:id])
+    set_high_score
     @high_score.destroy
     redirect_to high_scores_url, notice: 'Score was successfully deleted.'
   end
 
+  private
+    def set_high_score
+      @high_score = HighScore.find(params[:id])
+    end
+
+    def high_score_params
+      params.require(:high_score).permit(:user,:game,:score)
+    end
 end

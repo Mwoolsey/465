@@ -8,6 +8,7 @@ class ProfessorsController < ApplicationController
 
   #GET /professors/1
   def show
+    @rating = @professor.ratings.new
   end
 
   #GET /professors/new

@@ -1,0 +1,11 @@
+<h1>Editing reference</h1>
+<div id='wrapper'>
+  <div id="form">
+    <%=render 'form'%>
+  </div>
+  <%=link_to topic_path(@reference.topic) do%>
+    <div id="button" style="width: 100px">
+      Back to Topic
+    </div>
+  <%end%>
+</div>

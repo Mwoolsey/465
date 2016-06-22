@@ -1,6 +1,22 @@
 <h1>Editing topic: <%=@topic.title%></h1>
-
+<div id="form">
 <%=render 'form'%>
-
-<%=link_to 'Show this topic', @topic%> |
-<%=link_to 'Show all topics', topics_path%>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%=link_to @topic do%> 
+  <div id="button" style="width: 110px">
+    Show this topic
+  </div>
+<%end%>
+<%=link_to topics_path do%>
+  <div id="button" style="width: 110px">
+    Show all topics
+  </div>
+<%end%>

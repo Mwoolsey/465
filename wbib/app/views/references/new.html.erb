@@ -1,3 +1,12 @@
 <h1>New reference for: <%=@topic.title%></h1>
-<%=render 'form'%>
-<%=link_to 'Back', topic_path(@topic)%>
+<div id='wrapper'>
+  <div id='form'>
+  <%=render 'form'%>
+  </div>
+  <br>
+  <%=link_to topic_path(@topic) do%>
+    <div id='button'>
+      Back
+    </div>
+  <%end%>
+</div>

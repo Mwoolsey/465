@@ -17,8 +17,9 @@
       <%if !reference.new_record?%>
 	<tr>
 	  <td><a href="<%=reference.URL%>" target="_blank"><%=reference.URL%></a></td>
-	  <td><%=reference.created_at%></td>
-	  <td><%=link_to 'Delete', reference, method: :delete, data: {confirm: 'Are you sure?'}%></td>
+	  <td><%=reference.created_at.strftime("%B %d, %Y %H:%M:%S")%></td>
+	  <td id='link'><%=link_to 'Delete', reference, method: :delete, data: {confirm: 'Are you sure?'}%></td>
+	  <td id='link'><%=link_to 'Edit', edit_reference_path(reference)%></td>
 	</tr>
       <%end%>
     <%end%>
@@ -27,9 +28,19 @@
 <br>
 <br>
 <h3>Create New Reference</h3>
-<%=render 'references/form'%>
-<br>
-<br>
-
-<%=link_to 'Edit Topic', edit_topic_path(@topic)%> |
-<%=link_to 'Show all Topics', topics_path%>
+<div id='wrapper'>
+  <div id="form" style="height: 80px">
+    <%=render 'references/form'%>
+  </div>
+  <p></p>
+  <%=link_to edit_topic_path(@topic) do%> 
+    <div id="button" style="width: 80px">
+      Edit Topic
+    </div>
+  <%end%>
+  <%=link_to topics_path do%>
+    <div id="button" style="width: 100px">
+      Show all topics
+    </div> 
+  <%end%>
+</div>

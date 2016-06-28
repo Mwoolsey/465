@@ -31,12 +31,16 @@ ActiveRecord::Schema.define(version: 20160628035748) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "images", ["user_id"], name: "index_images_on_user_id"
+
   create_table "tags", force: :cascade do |t|
     t.string   "str"
     t.integer  "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "tags", ["image_id"], name: "index_tags_on_image_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "", null: false

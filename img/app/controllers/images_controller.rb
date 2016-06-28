@@ -5,11 +5,18 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     @images = Image.all
+    if user_signed_in?
+      @my_images = current_user.images 
+      @images_shared_with_me = current_user.image_users.map {|image_user| image_user.image}
+    else
+      @my_images = nil
+      @images_shared_with_me = nil
+    end
   end
 
   # GET /images/1
-  # GET /images/1.json
   def show
+    @image_tags = @image.tags
   end
 
   # GET /images/new
@@ -41,27 +48,18 @@ class ImagesController < ApplicationController
   end
 
   # PATCH/PUT /images/1
-  # PATCH/PUT /images/1.json
   def update
-    respond_to do |format|
       if @image.update(image_params)
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
-        format.json { render :show, status: :ok, location: @image }
+        redirect_to @image, notice: 'Image was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        render :edit 
       end
-    end
   end
 
   # DELETE /images/1
-  # DELETE /images/1.json
   def destroy
     @image.destroy
-    respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to images_url, notice: 'Image was successfully destroyed.' 
   end
 
   private
@@ -72,6 +70,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:filename, :private, :user_id)
+      params.require(:image).permit(:private)
     end
 end

@@ -1,15 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Public Images</h1>
+<%if user_signed_in? %>
+  <%= link_to 'New Image', new_image_path %>
+  <h1>My Images</h1>
+  <% @my_images.each do |image| %>
+    <%= link_to image_path(image) do %>
+      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+    <%end%>
+  <%end%>
+
+  <h1>Pictures Shared With Me:</h1>
+  <% @images_shared_with_me.each do |image| %>
+    <%= link_to image_path(image) do %>
+      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+    <%end%>
+  <%end%>
+
+<%end%>
+
+<h1>Public Images</h1>
 
 <% @images.each do |image| %>
   <% if image.private == false %>
-    <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+    <%= link_to image_path(image) do %>
+      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+    <%end%>
   <%end%>
 <%end%>
 
 <br>
 
 
-<!--this needs to be shown if a user is logged in--!>
-<%= link_to 'New Image', new_image_path %>

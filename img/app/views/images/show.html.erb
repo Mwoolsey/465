@@ -1,19 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Filename:</strong>
-  <%= @image.filename %>
-</p>
+<%= image_tag root_url + "/images/" + @image.filename, size: "300x300", alt: @image.filename %>
+<% if !user_signed_in? %>
+  <p>
+    <strong>Owner:</strong>
+    <%= @image.user.email %>
+  </p>
 
-<p>
-  <strong>Private:</strong>
-  <%= @image.private %>
-</p>
+<% else %>
 
-<p>
-  <strong>User:</strong>
-  <%= @image.user_id %>
-</p>
+  <p><strong>Tags:</strong></p>
+  <% @image_tags.each do |tag| %>
+    <%= tag.str %><br>
+  <% end %>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+  <% if @image.user == current_user %>
+  <% else %>
+  <% end %>
+
+<% end %>
+
+<p><%= link_to 'Back to all images', images_path %></p>
+
+
+<!-- just keeping for reference, will implement differently
+<%@image.eligible_users.each do |user|%>
+  <p><%= user.email %></p>
+<%end%>
+-->

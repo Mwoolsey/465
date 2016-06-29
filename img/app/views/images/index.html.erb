@@ -3,31 +3,44 @@
 <%if user_signed_in? %>
   <%= link_to 'New Image', new_image_path %>
   <h1>My Images</h1>
-  <% @my_images.each do |image| %>
-    <%= link_to image_path(image) do %>
-      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+  <div id="container">
+    <% @my_images.each do |image| %>
+      <%= link_to image_path(image) do %>
+	<figure>
+	  <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+      </figure>
+      <% end %>
     <%end%>
-  <%end%>
+  </div>
 
   <h1>Pictures Shared With Me:</h1>
-  <% @images_shared_with_me.each do |image| %>
-    <%= link_to image_path(image) do %>
-      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+  <div id="container">
+    <% @images_shared_with_me.each do |image| %>
+      <%= link_to image_path(image) do %>
+	<figure>
+	<%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+	<figcaption><%= image.user.name %></figcaption>
+      </figure>
+      <%end%>
     <%end%>
-  <%end%>
+  </div>
 
 <%end%>
 
 <h1>Public Images</h1>
 
-<% @images.each do |image| %>
-  <% if image.private == false %>
-    <%= link_to image_path(image) do %>
-      <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+<div id="container">
+  <% @images.each do |image| %>
+    <% if image.private == false %>
+      <%= link_to image_path(image) do %>
+	<figure>
+	    <%= image_tag root_url + "/images/" + image.filename, size: "150x150", alt: image.filename %>
+	  <figcaption><%= image.user.name %></figcaption>
+	</figure>
+      <%end%>
     <%end%>
   <%end%>
-<%end%>
+</div>
 
-<br>
 
 

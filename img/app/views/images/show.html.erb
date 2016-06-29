@@ -5,6 +5,8 @@
 
 <% if @image.user == current_user %>
 
+  <p><%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+
   <p><strong>Private:</strong> <%=@image.private%></p>
 
   <h3>Create New Tag</h3>
@@ -15,7 +17,7 @@
 
   <p>
     <strong>Owner:</strong>
-    <%= @image.user.email %>
+    <%= @image.user.name %>
   </p>
 <% end %>
 

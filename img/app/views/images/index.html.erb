@@ -3,6 +3,9 @@
 <%if user_signed_in? %>
   <%= link_to 'New Image', new_image_path %>
   <h1>My Images</h1>
+  <% if @my_images.empty? %>
+    <p>You haven't posted any pictures yet, get to uploading!</p>
+  <% end %>
   <div id="container">
     <% @my_images.each do |image| %>
       <%= link_to image_path(image) do %>
@@ -14,6 +17,9 @@
   </div>
 
   <h1>Pictures Shared With Me:</h1>
+  <% if @images_shared_with_me.empty? %>
+    <p>Nobody has shared with you, get some friends will ya</p>
+  <% end %>
   <div id="container">
     <% @images_shared_with_me.each do |image| %>
       <%= link_to image_path(image) do %>

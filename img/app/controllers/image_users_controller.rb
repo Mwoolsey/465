@@ -14,40 +14,20 @@ class ImageUsersController < ApplicationController
 
   # GET /image_users/new
   def new
-    @image_user = ImageUser.new
-  end
-
-  # GET /image_users/1/edit
-  def edit
+    @image = Image.find params[:image_id]
+    @image_user = @image.image_users.new
   end
 
   # POST /image_users
   # POST /image_users.json
   def create
-    @image_user = ImageUser.new(image_user_params)
-
-    respond_to do |format|
-      if @image_user.save
-        format.html { redirect_to @image_user, notice: 'Image user was successfully created.' }
-        format.json { render :show, status: :created, location: @image_user }
-      else
-        format.html { render :new }
-        format.json { render json: @image_user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /image_users/1
-  # PATCH/PUT /image_users/1.json
-  def update
-    respond_to do |format|
-      if @image_user.update(image_user_params)
-        format.html { redirect_to @image_user, notice: 'Image user was successfully updated.' }
-        format.json { render :show, status: :ok, location: @image_user }
-      else
-        format.html { render :edit }
-        format.json { render json: @image_user.errors, status: :unprocessable_entity }
-      end
+    @image = Image.find params[:image_id]
+    @image_user = @image.image_users.new(image_user_params)
+    if @image_user.save
+#yikes
+      redirect_to @image, notice: 'Image user was successfully created.'
+    else
+      render :new 
     end
   end
 

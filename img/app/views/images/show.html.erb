@@ -1,16 +1,20 @@
-<p id="notice"><%= notice %></p>
 
 <%= image_tag root_url + "/images/" + @image.filename, size: "300x300", alt: @image.filename %>
 
 
 <% if @image.user == current_user %>
 
-  <p><%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <p><%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'New Image', new_image_path %></p>
+  
 
   <p><strong>Private:</strong> <%=@image.private%></p>
 
   <h3>Create New Tag</h3>
   <%= render 'tags/form' %>
+  <% @image.image_users.each do |image_user| %>
+    <% #image_user.user.name %>
+  <% end %>
+  <%= render 'image_users/form' %>
   <br>
 
 <% else %>
@@ -24,7 +28,7 @@
 <p><strong>Tags:</strong></p>
 <% @image_tags.each do |tag| %>
   <% if !tag.new_record? %>
-    <%= tag.str %><br>
+    <%= tag.str %><%= link_to 'Delete tag', tag, method: :delete, data: { confirm: 'Are you sure?' } %><br>
   <% end %>
 <% end %>
 
@@ -32,8 +36,3 @@
 <p><%= link_to 'Back to all images', images_path %></p>
 
 
-<!-- this will be different, just used it to make sure the function works
-<%@image.eligible_users.each do |user|%>
-  <p><%= user.email %></p>
-<%end%>
---!>

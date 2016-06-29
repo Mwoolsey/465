@@ -18,6 +18,7 @@ class ImagesController < ApplicationController
   def show
     @image_tags = @image.tags
     @tag = @image.tags.new
+    @image_user = @image.image_users.new
   end
 
   # GET /images/new

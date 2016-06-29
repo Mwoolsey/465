@@ -17,6 +17,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   def show
     @image_tags = @image.tags
+    @tag = @image.tags.new
   end
 
   # GET /images/new

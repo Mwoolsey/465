@@ -7,7 +7,4 @@ class User < ActiveRecord::Base
   has_many :images
   has_many :image_users, dependent: :destroy
 
-  def shared_with_me
-  end
-
 end

@@ -6,7 +6,7 @@ class Image < ActiveRecord::Base
   has_many :tags, dependent: :destroy
 
   def eligible_users
-    users = User.all - [self.users] - [self.user]
+    users = User.all - self.users - [self.user]
   end
 
 end

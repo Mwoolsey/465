@@ -49,20 +49,56 @@ img {
 }
 
 #tags {
-  position: relative;
-  top: -540px;
-  bottom: 1000px;
-  left: 500px;
+  position: absolute;
+  top: 60px;
+  left: 100px;
 }
 
 #users {
+  position: absolute;
+  top: 60px;
+  left: 1380px;
+}
+
+#user_box {
+  display: block;
+  border-collapse: collapse;
+  border: 1px inset #b3b3b3;
+}
+
+#image_case {
+  position: absolute;
+  background-color: #b3b3b3;
+  width: 500px;
+  left: 660px;
+  border-style: groove;
+  padding-top: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 20px;
+}
+
+#links {
   position: relative;
-  top: -300px;
-  left: 1000px;
+  width: 504px;
+  margin: 0 auto;
+  border: 1px inset #b3b3b3;
+  background-color: #b3b3b3;
+  top: 430px;
+  left: -18px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
 }
 
 table {
   font-size: 18px;
+}
+
+.image_style {
+  display: block;
+  margin: 0 auto;
 }
 
 

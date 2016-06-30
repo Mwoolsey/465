@@ -1,42 +1,48 @@
-<%= image_tag root_url + "/images/" + @image.filename, width: "400px", alt: @image.filename %>
-<br>
-<%= link_to 'Back to all images', images_path %>
+<div id='image_case'>
+  <%= image_tag root_url + "/images/" + @image.filename, size: "400x400", alt: @image.filename, :class => "image_style" %>
+</div>
+  <br>
+  <div id="links">
+    <%= link_to 'Back to all images', images_path %>
 
-<% if @image.user != current_user %>
-  <p>
-    <strong>Owner:</strong>
-    <%= @image.user.name %>
-  </p>
+    <% if @image.user != current_user %>
+      <p>
+	<strong>Owner:</strong>
+	<%= @image.user.name %>
+      </p>
 
-<% else %>
+    <% else %>
 
-    | <%= link_to 'Edit Privacy', edit_image_path %> |
-    <%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-    <%= link_to 'New Image', new_image_path %>
+	| <%= link_to 'Edit Privacy', edit_image_path %> |
+	<%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+	<%= link_to 'New Image', new_image_path %>
 
-  <p><strong>Private:</strong> <%=@image.private%></p>
+    <p><strong>Private:</strong> <%=@image.private%></p>
+  </div>
 
+<div id='users'>
   <% if @image.private %>
 	<table>
 	  <thead>
 	    <tr><th align="left"><%= render 'image_users/form' %></th></tr>
-	    <tr><th align="left"><h4>Shared With:</h4></th></tr>
+	    <tr><th align="left"><h5>Users with Access:</h5></th></tr>
 	  </thead>
-	  <% @image.image_users.each do |image_user| %>
-	    <% if image_user.user != nil %>
-	      <tr>
-		<td><%= image_user.user.name %></td>
-		<td><%= link_to 'Delete User', image_user, method: :delete, data: { confirm: 'Are you sure?'} %></td>
-	      </tr>
-	      <br>
-	    <% end%>
-	  <% end %>
+	  <tbody id="user_box">
+	    <% @image.image_users.each do |image_user| %>
+	      <% if image_user.user != nil %>
+		<tr>
+		  <td><%= image_user.user.name %></td>
+		  <td><%= link_to 'Delete User', image_user, method: :delete, data: { confirm: 'Are you sure?'} %></td>
+		</tr>
+	      <% end%>
+	    <% end %>
+	    </tbody>
 	</table>
   <% end %>
-
+</div>
 <% end %>
 
-<div>
+<div id='tags'>
   <table>
     <thead>
       <% if current_user == @image.user %>
@@ -55,7 +61,6 @@
 	      <td><%= link_to 'Edit', edit_tag_url(tag) %></td>
 	      <td><%= link_to 'Delete', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	    <% end %>
-	    <br>
 	  <% end %>
 	</tr>
       <% end %>

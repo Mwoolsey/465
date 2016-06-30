@@ -11,10 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :filename %><br>
-    <%= f.file_field :uploaded_file %>
-  </div>
+  <% if @image.filename == nil %>
+    <div class="field">
+      <%= f.label :filename %><br>
+      <%= f.file_field :uploaded_file %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :private %><br>
     <%= f.check_box :private %>

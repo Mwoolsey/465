@@ -5,12 +5,23 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     @images = Image.all
+    @public_images = []
+    @images.each do |image|
+      if !image.private
+	@public_images << image
+      end
+    end
     if user_signed_in?
       @my_images = current_user.images 
       @images_shared_with_me = current_user.image_users.map {|image_user| image_user.image}
     else
       @my_images = nil
       @images_shared_with_me = nil
+    end
+    unless @my_images.nil?
+      @public_images = @images - @my_images
+    else
+ 
     end
   end
 
@@ -19,6 +30,16 @@ class ImagesController < ApplicationController
     @image_tags = @image.tags
     @tag = @image.tags.new
     @image_user = @image.image_users.new
+    if current_user != nil && @image.user_id == current_user.id
+      # let user see page since they own it
+    elsif @image.private && current_user == nil
+      # image is private and user is not signed in so they dont have access
+      redirect_to images_path, notice: 'You Do Not Have Access To That Image'
+    elsif @image.private && @image.image_users.map {|x| x.user_id}.index(current_user.id) == nil
+      # image is private and user is not in image_user list so no access
+      redirect_to images_path, notice: 'You Do Not Have Access To That Image'
+    end
+
   end
 
   # GET /images/new

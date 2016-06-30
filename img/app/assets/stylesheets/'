@@ -14,10 +14,6 @@
  *= require_self
  */
 
-body {
-  background-color: lightgrey;
-}
-
 #container {
     text-align: center;
 }
@@ -49,20 +45,8 @@ img {
 }
 
 #tags {
-  position: relative;
-  top: -540px;
-  bottom: 1000px;
-  left: 500px;
+  position: absolute;
+  top: -10px;
+  right: 600px;
+  border: 1px;
 }
-
-#users {
-  position: relative;
-  top: -300px;
-  left: 1000px;
-}
-
-table {
-  font-size: 18px;
-}
-
-

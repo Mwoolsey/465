@@ -24,7 +24,6 @@ class ImageUsersController < ApplicationController
     @image = Image.find params[:image_id]
     @image_user = @image.image_users.new(image_user_params)
     if @image_user.save
-#yikes
       redirect_to @image, notice: 'Image user was successfully created.'
     else
       render :new 
@@ -32,13 +31,9 @@ class ImageUsersController < ApplicationController
   end
 
   # DELETE /image_users/1
-  # DELETE /image_users/1.json
   def destroy
     @image_user.destroy
-    respond_to do |format|
-      format.html { redirect_to image_users_url, notice: 'Image user was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @image_user.image, notice: 'Image user was successfully destroyed.' 
   end
 
   private

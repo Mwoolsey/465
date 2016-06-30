@@ -1,7 +1,8 @@
-<p id="notice"><%= notice %></p>
 
 <%if user_signed_in? %>
-  <%= link_to 'New Image', new_image_path %>
+  <br>
+  <h3><%= link_to 'Upload New Image', new_image_path %></h3>
+  <br>
   <h1>My Images</h1>
   <% if @my_images.empty? %>
     <p>You haven't posted any pictures yet, get to uploading!</p>
@@ -36,7 +37,7 @@
 <h1>Public Images</h1>
 
 <div id="container">
-  <% @images.each do |image| %>
+  <% @public_images.each do |image| %>
     <% if image.private == false %>
       <%= link_to image_path(image) do %>
 	<figure>

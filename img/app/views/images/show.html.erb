@@ -1,38 +1,65 @@
+<%= image_tag root_url + "/images/" + @image.filename, width: "400px", alt: @image.filename %>
+<br>
+<%= link_to 'Back to all images', images_path %>
 
-<%= image_tag root_url + "/images/" + @image.filename, size: "300x300", alt: @image.filename %>
-
-
-<% if @image.user == current_user %>
-
-  <p><%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'New Image', new_image_path %></p>
-  
-
-  <p><strong>Private:</strong> <%=@image.private%></p>
-
-  <h3>Create New Tag</h3>
-  <%= render 'tags/form' %>
-  <% @image.image_users.each do |image_user| %>
-    <% #image_user.user.name %>
-  <% end %>
-  <%= render 'image_users/form' %>
-  <br>
-
-<% else %>
-
+<% if @image.user != current_user %>
   <p>
     <strong>Owner:</strong>
     <%= @image.user.name %>
   </p>
-<% end %>
 
-<p><strong>Tags:</strong></p>
-<% @image_tags.each do |tag| %>
-  <% if !tag.new_record? %>
-    <%= tag.str %><%= link_to 'Delete tag', tag, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+<% else %>
+
+    | <%= link_to 'Edit Privacy', edit_image_path %> |
+    <%= link_to 'Delete Image', @image, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+    <%= link_to 'New Image', new_image_path %>
+
+  <p><strong>Private:</strong> <%=@image.private%></p>
+
+  <% if @image.private %>
+	<table>
+	  <thead>
+	    <tr><th align="left"><%= render 'image_users/form' %></th></tr>
+	    <tr><th align="left"><h4>Shared With:</h4></th></tr>
+	  </thead>
+	  <% @image.image_users.each do |image_user| %>
+	    <% if image_user.user != nil %>
+	      <tr>
+		<td><%= image_user.user.name %></td>
+		<td><%= link_to 'Delete User', image_user, method: :delete, data: { confirm: 'Are you sure?'} %></td>
+	      </tr>
+	      <br>
+	    <% end%>
+	  <% end %>
+	</table>
   <% end %>
+
 <% end %>
 
+<div>
+  <table>
+    <thead>
+      <% if current_user == @image.user %>
+	<tr><th><h2>Create New Tag</h2></th></tr>
+	<tr><th><%= render 'tags/form' %></th></tr>
+      <% end %>
+      <tr><th align="left"><h2>Tags:</h2></th></tr>
+    </thead>
 
-<p><%= link_to 'Back to all images', images_path %></p>
-
+    <tbody>
+      <% @image.tags.each do |tag| %>
+	<tr>
+	  <% if !tag.new_record? %>
+	    <td><%= tag.str %></td>
+	    <% if current_user == @image.user %>
+	      <td><%= link_to 'Edit', edit_tag_url(tag) %></td>
+	      <td><%= link_to 'Delete', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    <% end %>
+	    <br>
+	  <% end %>
+	</tr>
+      <% end %>
+    </tbody>
+  </table
+</div>
 

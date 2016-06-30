@@ -9,7 +9,7 @@ class Image < ActiveRecord::Base
 
   def eligible_users
     users = User.all - self.users - [self.user]
-    users.map { |user| ["#{user.name}(#{user.email})", user_id] }
+    users.map { |user| ["#{user.name}(#{user.email})", user.id] }
   end
 
   private

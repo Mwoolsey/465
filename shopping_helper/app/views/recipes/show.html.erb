@@ -1,18 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Str:</strong>
-  <%= @recipe.str %>
+  <strong>Name:</strong>
+  <%= @recipe.name %>
 </p>
 
 <p>
   <strong>User:</strong>
   <%= @recipe.user %>
-</p>
-
-<p>
-  <strong>List:</strong>
-  <%= @recipe.list %>
 </p>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |

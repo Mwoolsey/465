@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160704001725) do
 
   create_table "ingredient_recipes", force: :cascade do |t|
-    t.float    "quantity"
+    t.decimal  "quantity"
     t.string   "quantity_type"
     t.integer  "recipe_id"
     t.integer  "ingredient_id"

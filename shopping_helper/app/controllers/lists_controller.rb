@@ -3,13 +3,37 @@ class ListsController < ApplicationController
 
   # GET /lists
   # GET /lists.json
-  def index
-    @lists = List.all
+  def index 
+    # go straight to the list's show page for the current user
+    redirect_to list_url(current_user.id)
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @recipes = @list.recipes
+    @ingredients = []
+    used_ingredients = []
+    @unique_ingredients = []
+    @recipes.each do |recipe| 
+      recipe.ingredient_recipes.each do |ir|
+	@ingredients << [ir.ingredient.name, ir.quantity, ir.quantity_type]
+      end
+    end
+    
+    @ingredients.each do |ingredient|
+      offset = nil
+      @unique_ingredients.each_index do |x|
+	if ingredient[0] == @unique_ingredients[x][0]
+	  @unique_ingredients[x][1] += ingredient[1]
+	  offset = x
+	end
+      end
+
+      if offset == nil
+        @unique_ingredients << ingredient	
+      end
+    end
   end
 
   # GET /lists/new

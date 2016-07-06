@@ -169,7 +169,7 @@ ingredients = Ingredient.create(
   else
     unit = "Tsp"
   end
-  IngredientRecipe.create( { recipe_id: (1 + rand(40)), ingredient_id: (1 + rand(33)), quantity_type: unit, quantity: rand(4.0)} ) 
+  IngredientRecipe.create( { recipe_id: (1 + rand(40)), ingredient_id: (1 + rand(33)), quantity_type: unit, quantity: (0.1 + rand(4.0)).round(2)} ) 
 end
 
 ir_list = IngredientRecipe.all

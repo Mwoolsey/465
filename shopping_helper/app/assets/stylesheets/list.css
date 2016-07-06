@@ -1,0 +1,42 @@
+#background {
+
+}
+
+#list_results {
+  position: absolute;
+  background-color: lightgrey;
+  height: 40em;
+  width: 30em;
+  top: 10em;
+  left: 1em;
+  overflow: scroll;
+}
+
+#current_recipes {
+  position: absolute;
+  background-color: lightgrey;
+  height: 40em;
+  width: 30em;
+  left: 32em;
+  top: 10em;
+  overflow: scroll;
+}
+
+#recipe_ingredients {
+  position: absolute;
+  background-color: darkgrey;
+  height: 40em;
+  width: 30em;
+  left: 63em;
+  top: 10em;
+}
+
+#test {
+  position: absolute;
+  background-color: darkgrey;
+  height: 10em;
+  width: 30em;
+  left: 32em;
+  top: 51em;
+}
+

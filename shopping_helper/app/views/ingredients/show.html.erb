@@ -1,19 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @ingredient.name %>
 </p>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @ingredient.quantity %>
-</p>
-
-<p>
-  <strong>Quantity type:</strong>
-  <%= @ingredient.quantity_type %>
-</p>
 
 <%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
-<%= link_to 'Back', ingredients_path %>
+<%= link_to 'Back', list_path(current_user.id) %>

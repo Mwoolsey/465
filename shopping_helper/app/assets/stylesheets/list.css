@@ -2,23 +2,30 @@
 
 }
 
-#list_results {
+.results_container {
   position: absolute;
-  background-color: lightgrey;
-  height: 40em;
+  height: 43em;
   width: 30em;
   top: 10em;
   left: 1em;
+}
+
+#recipes {
+  left: 32em;
+}
+#list_results {
+  position: relative;
+  background-color: lightgrey;
+  height: 40em;
+  width: 30em;
   overflow: scroll;
 }
 
 #current_recipes {
-  position: absolute;
+  position: relative;
   background-color: lightgrey;
   height: 40em;
   width: 30em;
-  left: 32em;
-  top: 10em;
   overflow: scroll;
 }
 
@@ -30,6 +37,7 @@
   left: 63em;
   top: 10em;
 }
+
 
 #test {
   position: absolute;

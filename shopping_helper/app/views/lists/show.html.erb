@@ -1,39 +1,44 @@
 <h1 id="list_header">Welcome <%= current_user.name %>, here is your shopping list!</h1>
-
-<div id="list_results">
-  <h2>Shopping List:</h2>
-  <table>
-    <thead>
-      <tr>
-	<th>Name</th>
-	<th>Quantity</th>
-	<th>Unit</th>
-      </tr>
-    </thead>
-    <% @unique_ingredients.each do |ui| %>
-      <tr>
-	<td><%= ui[0] %></td>
-	<td><%= ui[1] %></td>
-	<td><%= ui[2] %><%= "s" if (ui[1]>1||ui[1]<1) %></td>
-      </tr>
-    <% end %>
-  </table>
+<div class="results_container">
+  <div id="list_results">
+    <h2>Shopping List:</h2>
+    <table>
+      <thead>
+	<tr>
+	  <th>Name</th>
+	  <th>Quantity</th>
+	  <th>Unit</th>
+	</tr>
+      </thead>
+      <% @unique_ingredients.each do |ui| %>
+	<tr>
+	  <td><%= link_to ui[0], ingredient_path(ui[3]) %></td>
+	  <td><%= ui[1] %></td>
+	  <td><%= ui[2] %><%= "s" if (ui[1]>1||ui[1]<1) %></td>
+	</tr>
+      <% end %>
+    </table>
+  </div>
+  <br />
+  <%= link_to "Create New Ingredient", new_ingredient_path %>
 </div>
 
-<div id="current_recipes">
-  <h3 margin-left: 1em>Currently added recipes:</h3>
-  <% @recipes.each do |recipe| %>
-    <ul>
-      <li margin-left: 1em><%= recipe.name %></li>
-    </ul>
-  <% end %>
+
+<div class="results_container" id="recipes">
+  <div id="current_recipes">
+    <h3 margin-left: 1em>Currently added recipes:</h3>
+    <% @recipes.each do |recipe| %>
+      <ul>
+	<li><%= link_to recipe.name, recipe_path(recipe.id) %></li>
+      </ul>
+    <% end %>
+  </div>
+  <br />
+  <%= link_to "Create New Recipe", new_recipe_path %>
 </div>
 
 <div id="recipe_ingredients">
   <h3>hello</h3>
 </div>
 
-<div id="test">
-  <p>hello</p>
-</div>
 

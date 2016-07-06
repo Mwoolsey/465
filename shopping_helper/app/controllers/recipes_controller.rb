@@ -10,6 +10,10 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @ingredients = []
+    @recipe.ingredients.each do |ingredient|
+      @ingredients << ingredient.name
+    end
   end
 
   # GET /recipes/new

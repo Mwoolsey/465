@@ -17,7 +17,7 @@ class ListsController < ApplicationController
     @unique_ingredients = []
     @recipes.each do |recipe| 
       recipe.ingredient_recipes.each do |ir|
-	@ingredients << [ir.ingredient.name, ir.quantity, ir.quantity_type]
+	@ingredients << [ir.ingredient.name, ir.quantity, ir.quantity_type, ir.ingredient_id]
       end
     end
     

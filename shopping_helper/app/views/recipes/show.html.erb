@@ -6,9 +6,15 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @recipe.user %>
+  <strong>Ingredients:</strong>
+  <% @ingredients.each do |ingredient| %>
+    <ul>
+      <li><%= ingredient %></li>
+    </ul>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<% if current_user.id == @recipe.user_id %>
+  <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<% end %>
+<%= link_to 'Back', list_path(current_user.id) %>

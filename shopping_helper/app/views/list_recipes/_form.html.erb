@@ -1,4 +1,4 @@
-<%= form_for(@list_recipe) do |f| %>
+<%= form_for([@list,@list_recipe]) do |f| %>
   <% if @list_recipe.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@list_recipe.errors.count, "error") %> prohibited this list_recipe from being saved:</h2>
@@ -12,12 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :list_id %><br>
-    <%= f.text_field :list_id %>
-  </div>
-  <div class="field">
-    <%= f.label :recipe_id %><br>
-    <%= f.text_field :recipe_id %>
+    <%= f.select :recipe_id, @list.recipes_not_used %>
   </div>
   <div class="actions">
     <%= f.submit %>

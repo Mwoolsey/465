@@ -15,6 +15,19 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <h3>Add ingredients:</h3>
+  <%= f.nested_fields_for :ingredient_recipes do |ff| %>
+  <table>
+      <th>Ingredient</th><th>Quantity</th><th>Unit</th>
+      <tr>
+	<td><%= ff.select :ingredient_id, @recipe.ingredients_not_used %></td>
+	<td><%= ff.number_field :quantity %></td> 
+	<td><%= ff.select :quantity_type, @units %></td>
+	<td><%= ff.remove_nested_fields_link 'Remove Ingredient' %></td>
+      </tr>
+    </table>
+  <% end %>
+    <%= f.add_nested_fields_link :ingredient_recipes, 'Add Ingredient' %><br />
   <div class="actions">
     <%= f.submit %>
   </div>

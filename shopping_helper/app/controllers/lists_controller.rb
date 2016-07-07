@@ -11,20 +11,28 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
+    load "#{Rails.root}/lib/units.rb"
     @recipes = @list.recipes
+    @recipe_add_list = @recipes.map {|recipe| [recipe.name, recipe.id]}
+    @recipe = @list.recipes.new
+    @list_recipe = @list.list_recipes.new
+    @recipe.ingredient_recipes.new
+    @units = units
     @ingredients = []
     used_ingredients = []
     @unique_ingredients = []
     @recipes.each do |recipe| 
       recipe.ingredient_recipes.each do |ir|
-	@ingredients << [ir.ingredient.name, ir.quantity, ir.quantity_type, ir.ingredient_id]
+	if !ir.new_record?
+	  @ingredients << [ir.ingredient.name, ir.quantity, ir.quantity_type, ir.ingredient_id]
+	end
       end
     end
     
     @ingredients.each do |ingredient|
       offset = nil
       @unique_ingredients.each_index do |x|
-	if ingredient[0] == @unique_ingredients[x][0]
+	if ingredient[0] == @unique_ingredients[x][0] && ingredient[2] == @unique_ingredients[x][2]
 	  @unique_ingredients[x][1] += ingredient[1]
 	  offset = x
 	end

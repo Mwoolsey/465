@@ -1,4 +1,8 @@
-<h1 id="list_header">Welcome <%= current_user.name %>, here is your shopping list!</h1>
+<div id="header_bar">
+  <h1 id="list_header">Welcome <%= current_user.name %>, here is your shopping list!</h1>
+  <br />
+  <h3 id="create_ingredient"><%= link_to "Create New Ingredient", new_ingredient_path %></h3>
+</div>
 <div class="results_container">
   <div id="list_results">
     <h2>Shopping List:</h2>
@@ -20,25 +24,26 @@
     </table>
   </div>
   <br />
-  <%= link_to "Create New Ingredient", new_ingredient_path %>
 </div>
 
 
 <div class="results_container" id="recipes">
   <div id="current_recipes">
-    <h3 margin-left: 1em>Currently added recipes:</h3>
-    <% @recipes.each do |recipe| %>
-      <ul>
-	<li><%= link_to recipe.name, recipe_path(recipe.id) %></li>
-      </ul>
+    <h3>Currently added recipes:</h3>
+    <% @list.recipes.each do |recipe| %>
+      <% if !recipe.new_record? %>
+	<ul>
+	  <li><%= link_to recipe.name, recipe_path(recipe.id) %> <%= link_to 'Remove', recipe, method: :delete, data: {confirm: 'Are you sure?'} %></li>
+	</ul>
+      <% end %>
     <% end %>
+    <%= render 'list_recipes/form' %>
   </div>
-  <br />
-  <%= link_to "Create New Recipe", new_recipe_path %>
 </div>
 
-<div id="recipe_ingredients">
-  <h3>hello</h3>
+<div id="ingredient_recipes">
+  <h3>Create New Recipe</h3>
+  <%= render 'recipes/form' %>
 </div>
 
 

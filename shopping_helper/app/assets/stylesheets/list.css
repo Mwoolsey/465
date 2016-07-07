@@ -1,13 +1,26 @@
-#background {
+body {
+  background-image: url(ShoppingHelperBackground.jpg);
+  background-size: cover;
+}
 
+#header_bar {
+  position: relative;
+  background-color: #ccffcc;
+  border-style: solid;
+  border-radius: 1em;
+  height: 10em;
+}
+
+#create_ingredient {
 }
 
 .results_container {
   position: absolute;
   height: 43em;
   width: 30em;
-  top: 10em;
+  top: 15em;
   left: 1em;
+  border-radius: 0.5em;
 }
 
 #recipes {
@@ -16,6 +29,7 @@
 #list_results {
   position: relative;
   background-color: lightgrey;
+  border-radius: 0.5em;
   height: 40em;
   width: 30em;
   overflow: scroll;
@@ -24,27 +38,20 @@
 #current_recipes {
   position: relative;
   background-color: lightgrey;
+  border-radius: 0.5em;
   height: 40em;
   width: 30em;
   overflow: scroll;
 }
 
-#recipe_ingredients {
+#ingredient_recipes {
   position: absolute;
   background-color: darkgrey;
+  border-radius: 0.5em;
   height: 40em;
-  width: 30em;
+  width: 39em;
   left: 63em;
-  top: 10em;
+  top: 15em;
 }
 
-
-#test {
-  position: absolute;
-  background-color: darkgrey;
-  height: 10em;
-  width: 30em;
-  left: 32em;
-  top: 51em;
-}
 

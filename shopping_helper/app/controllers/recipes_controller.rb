@@ -18,7 +18,10 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
+    load "#{Rails.root}/lib/units.rb"
     @recipe = Recipe.new
+    @recipe.ingredient_recipes.new
+    @units = units
   end
 
   # GET /recipes/1/edit
@@ -30,9 +33,10 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
 
+    @recipe.user_id = current_user.id
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to list_path(current_user.id), notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
@@ -73,6 +77,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :user_id)
+      params.require(:recipe).permit(:name, ingredient_recipes_attributes: [:quantity, :quantity_type, :ingredient_id, :recipe_id, :_destroy, :id])
     end
 end

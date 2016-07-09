@@ -4,15 +4,25 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index 
-    # go straight to the list's show page for the current user
     redirect_to list_url(current_user.id)
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
+
+    # load the units file
     load "#{Rails.root}/lib/units.rb"
+
+    # dont let a user look at a different list than their own, and make them sign in again
+    if current_user.id != @list.id
+      flash[:notice] = 'You do not have access to that, please sign in again'
+      sign_out current_user
+      redirect_to new_user_session_path
+    end
     @recipes = @list.recipes
+    @all_recipes = Recipe.all
+    @all_ingredients = Ingredient.all
     @recipe_add_list = @recipes.map {|recipe| [recipe.name, recipe.id]}
     @recipe = @list.recipes.new
     @list_recipe = @list.list_recipes.new
@@ -42,6 +52,12 @@ class ListsController < ApplicationController
         @unique_ingredients << ingredient	
       end
     end
+    @all_recipes = @all_recipes.map {|recipe| [recipe.name, recipe.id]}
+    @all_recipes.sort_by! {|x,y| x} 
+    @all_ingredients = @all_ingredients.map {|i| [i.name, i.id]}
+    @all_ingredients.sort_by! {|x,y| x}
+    @unique_ingredients.sort_by! {|w,x,y,z| w}
+#yikes
   end
 
   # GET /lists/new

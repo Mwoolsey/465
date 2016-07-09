@@ -17,7 +17,7 @@
   </div>
   <h3>Add ingredients:</h3>
   <%= f.nested_fields_for :ingredient_recipes do |ff| %>
-  <table>
+  <table style="height: 5em">
       <th>Ingredient</th><th>Quantity</th><th>Unit</th>
       <tr>
 	<td><%= ff.select :ingredient_id, @recipe.ingredients_not_used %></td>
@@ -27,7 +27,8 @@
       </tr>
     </table>
   <% end %>
-    <%= f.add_nested_fields_link :ingredient_recipes, 'Add Ingredient' %><br />
+  <%= f.add_nested_fields_link :ingredient_recipes, 'Add Ingredient' %><br />
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>

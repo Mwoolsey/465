@@ -5,53 +5,97 @@ body {
 
 #header_bar {
   position: relative;
+  width: 100%;
   background-color: #ccffcc;
   border-style: solid;
   border-radius: 1em;
   height: 10em;
 }
 
-#create_ingredient {
+#list_header {
+  top: 50%;
 }
 
-.results_container {
-  position: absolute;
-  height: 43em;
-  width: 30em;
-  top: 15em;
-  left: 1em;
-  border-radius: 0.5em;
-}
-
-#recipes {
-  left: 32em;
-}
-#list_results {
+#main_wrapper {
+  font-size: 1.2em;
   position: relative;
-  background-color: lightgrey;
-  border-radius: 0.5em;
-  height: 40em;
-  width: 30em;
-  overflow: scroll;
+  width: 100%;
+  min-height: 60em;
+  height: 100em;
+  background-color: #e6ffe6;
+  border-style: solid;
+  border-radius: 1em;
+  top: 2em;
+}
+
+.centered {
+  margin: 0;
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+#shopping_list {
+  position: relative;
+  height: 50%;
+  width: 25%;
+  left: 3%;
+  float: left;
+  overflow-y: auto;
 }
 
 #current_recipes {
-  position: relative;
-  background-color: lightgrey;
+  height: 100%;
+  width: 36%;
+  float: left;
+}
+
+#current_recipes table {
+  border-style: groove;
   border-radius: 0.5em;
-  height: 40em;
-  width: 30em;
-  overflow: scroll;
+}
+
+.cr_inner {
+  position: relative;
+  width: 50%;
+  left: 30%;
 }
 
 #ingredient_recipes {
-  position: absolute;
-  background-color: darkgrey;
-  border-radius: 0.5em;
-  height: 40em;
-  width: 39em;
-  left: 63em;
-  top: 15em;
+  height: 100%;
+  width: 30%;
+  float: left;
+}
+
+#recipe_search {
+  height: 8em;
+  overflow-y: auto;
+  border-style: inset;
+}
+
+#ingredient_recipes table {
+  height: 13em;
+}
+
+#user_nav {
+  position: relative;
+  color: white;
+  top: 1em;
 }
 
 
+.link_to {
+  font-size: 1.2em;
+}
+.link_to:link{
+  color: white;
+}
+.link_to:visited {
+  color: white;
+}
+
+.clear_both {
+  clear: both;
+}

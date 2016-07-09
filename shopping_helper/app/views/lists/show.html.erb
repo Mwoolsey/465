@@ -1,10 +1,20 @@
-<div id="header_bar">
-  <h1 id="list_header">Welcome <%= current_user.name %>, here is your shopping list!</h1>
-  <br />
-  <h3 id="create_ingredient"><%= link_to "Create New Ingredient", new_ingredient_path %></h3>
+<div id="user_nav">
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "link_to" %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+  <p class="alert"><%= alert %></p>
+  <p class="notice"><%= notice %></p>
 </div>
-<div class="results_container">
-  <div id="list_results">
+<div id="header_bar">
+  <h1 id="list_header" class="centered">Welcome <%= current_user.name %>, here is your shopping list!</h1>
+</div>
+<div id="main_wrapper">
+
+  <div id="shopping_list">
     <h2>Shopping List:</h2>
     <table>
       <thead>
@@ -16,34 +26,58 @@
       </thead>
       <% @unique_ingredients.each do |ui| %>
 	<tr>
-	  <td><%= link_to ui[0], ingredient_path(ui[3]) %></td>
+	  <td><%= ui[0] %></td>
 	  <td><%= ui[1] %></td>
 	  <td><%= ui[2] %><%= "s" if (ui[1]>1||ui[1]<1) %></td>
 	</tr>
       <% end %>
     </table>
   </div>
-  <br />
-</div>
 
 
-<div class="results_container" id="recipes">
   <div id="current_recipes">
-    <h3>Currently added recipes:</h3>
-    <% @list.recipes.each do |recipe| %>
-      <% if !recipe.new_record? %>
-	<ul>
-	  <li><%= link_to recipe.name, recipe_path(recipe.id) %> <%= link_to 'Remove', recipe, method: :delete, data: {confirm: 'Are you sure?'} %></li>
-	</ul>
-      <% end %>
-    <% end %>
-    <%= render 'list_recipes/form' %>
+    <div class="cr_inner">
+      <h3>Currently added recipes:</h3>
+      <table>
+	<% @list.list_recipes.each do |list_recipe| %>
+	  <% if !list_recipe.new_record? && list_recipe.recipe != nil %>
+	    <tr>
+	      <td><%= link_to list_recipe.recipe.name, recipe_path(list_recipe.recipe_id) %></td>
+	      <td><%= link_to 'Remove', list_recipe, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+	    </tr>
+	  <% end %>
+	<% end %>
+      </table>
+      <br />
+      <%= render 'list_recipes/form' %>
+    </div>
   </div>
-</div>
 
-<div id="ingredient_recipes">
-  <h3>Create New Recipe</h3>
-  <%= render 'recipes/form' %>
+  <div id="ingredient_recipes">
+    <table>
+      <tr><th>View a recipe</th><th style="padding-left: 5em">Pick an ingredient to see recipes</th></tr>
+      <tr>
+	<td style="border-top-style: solid">
+	  <div id="recipe_search">
+	    <% @all_recipes.each do |recipe| %>
+	      <%= link_to recipe[0], recipe_path(recipe[1]) %><br />
+	    <% end %>	
+	  </div>
+	</td>
+        <td style="padding-left: 5em; border-top-style: solid">
+	  <div id="recipe_search">
+	    <% @all_ingredients.each do |ingredient| %>
+	      <%= link_to ingredient[0], ingredient_path(ingredient[1]) %><br />
+	    <% end %>
+	  </div>
+	</td> 
+      </tr>
+    </table>
+    <hr />
+    <h2>Create New Recipe</h2>
+    <%= render 'recipes/form' %>
+    <h3 id="create_ingredient"><%= link_to "Create New Ingredient", new_ingredient_path %></h3>
+  </div>
 </div>
 
 

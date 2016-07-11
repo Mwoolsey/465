@@ -109,21 +109,13 @@ recipes = Recipe.create(
     { name: 'Salsbury Steak', user_id: (1 + rand(26)) },
     { name: 'Soup, curry', user_id: (1 + rand(26)) },
     { name: 'Pulled Pork', user_id: (1 + rand(26)) },
-    { name: 'Break, Pumpkin', user_id: (1 + rand(26)) },
+    { name: 'Bread, Pumpkin', user_id: (1 + rand(26)) },
     { name: 'Candied Apricots', user_id: (1 + rand(26)) },
     { name: 'Salad, Ceasar', user_id: (1 + rand(26)) }
   ]
 )
 
 (1..200).each {|x| ListRecipe.create( [ { list_id: (1 + rand(26)), recipe_id: (1 + rand(40)) } ] )}
-
-=begin
-list_recipes = ListRecipe.create(
-  [
-    { list_id: (1 + rand(26)), recipe_id: (1 + rand(40)) }
-  ]
-)
-=end
 
 ingredients = Ingredient.create(
   [

@@ -1,5 +1,19 @@
-<h1>New Ingredient</h1>
+<div id="user_nav">
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "link_to" %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+  <p class="alert"><%= alert %></p>
+  <p class="notice"><%= notice %></p>
+</div>
 
-<%= render 'form' %>
+<div class="recipe_show">
+  <h1>New Ingredient</h1>
 
-<%= link_to 'Back', list_path(current_user.id) %>
+  <%= render 'form' %>
+
+  <%= link_to 'Back', list_path(current_user.id) %>
+</div>

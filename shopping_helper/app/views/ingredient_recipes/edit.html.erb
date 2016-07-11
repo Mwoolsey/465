@@ -1,6 +1,7 @@
-<h1>Editing Ingredient Recipe</h1>
+<div class="ingredient_details">
+  <h1><u>Editing Ingredient Quantities</u></h1>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', @ingredient_recipe %> |
-<%= link_to 'Back', ingredient_recipes_path %>
+  <%= link_to 'Back', edit_recipe_path(@ingredient_recipe.recipe) %>
+</div>

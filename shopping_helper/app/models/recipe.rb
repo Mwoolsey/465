@@ -1,4 +1,5 @@
 class Recipe < ActiveRecord::Base
+  validates :name, presence: true
   belongs_to :user
   has_many :lists, through: :list_recipes
   has_many :list_recipes

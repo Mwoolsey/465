@@ -21,7 +21,7 @@ body {
   position: relative;
   width: 100%;
   min-height: 60em;
-  height: 100em;
+  height: 50em;
   background-color: #e6ffe6;
   border-style: solid;
   border-radius: 1em;
@@ -39,7 +39,7 @@ body {
 
 #shopping_list {
   position: relative;
-  height: 50%;
+  height: 80%;
   width: 25%;
   left: 3%;
   float: left;
@@ -77,6 +77,12 @@ body {
 
 #ingredient_recipes table {
   height: 13em;
+}
+
+.new_recipes {
+  position: relative;
+  height: 40%;
+  overflow: auto;
 }
 
 #user_nav {

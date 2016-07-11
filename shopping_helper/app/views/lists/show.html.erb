@@ -15,7 +15,7 @@
 <div id="main_wrapper">
 
   <div id="shopping_list">
-    <h2>Shopping List:</h2>
+    <h2>Shopping List</h2>
     <table>
       <thead>
 	<tr>
@@ -28,7 +28,7 @@
 	<tr>
 	  <td><%= ui[0] %></td>
 	  <td><%= ui[1] %></td>
-	  <td><%= ui[2] %><%= "s" if (ui[1]>1||ui[1]<1) %></td>
+	  <td><%= ui[2] %><%= "s" if ((ui[1]!=1)&&(ui[2]!='Whole')&&(ui[2]!='Pinch')) %><%= "es" if ui[2]=='Pinch' && ui[1]!=1 %></td>
 	</tr>
       <% end %>
     </table>
@@ -75,7 +75,9 @@
     </table>
     <hr />
     <h2>Create New Recipe</h2>
-    <%= render 'recipes/form' %>
+    <div class="new_recipes">
+      <%= render 'recipes/form' %>
+    </div>
     <h3 id="create_ingredient"><%= link_to "Create New Ingredient", new_ingredient_path %></h3>
   </div>
 </div>

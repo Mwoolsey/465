@@ -11,24 +11,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    list = List.create( [ { user_id: current_user.id } ] )
+    list = List.create( [ { user_id: @user.id } ] )
+
+    ######################################################################################
+    # this is the hack I have to use to set the name of the user inside the action, but as
+    # soon as the method is done it reverts the name back to ""
+    #@user.name = params[:user][:name]
+
+    #######################################################################################
   end
 
   # GET /resource/edit
   def edit
-    #yikes!
     super
   end
 
   # PUT /resource
   def update
-    #yikes!
     super
   end
 
   # DELETE /resource
   def destroy
-    #yikes!
     super
   end
 
@@ -61,5 +65,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     super(resource)
+  end
+  
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

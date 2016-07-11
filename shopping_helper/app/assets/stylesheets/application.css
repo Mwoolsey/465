@@ -17,3 +17,10 @@
 .new_session {
   font-size: 2em;
 }
+
+.sign_up {
+  background-color: #ccffcc;
+  padding: 1em;
+  border-radius: 0.5em;
+  width: 20%;
+}

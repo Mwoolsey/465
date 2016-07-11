@@ -19,6 +19,9 @@ class IngredientRecipesController < ApplicationController
 
   # GET /ingredient_recipes/1/edit
   def edit
+    load "#{Rails.root}/lib/units.rb"
+    @units = units
+
   end
 
   # POST /ingredient_recipes
@@ -28,7 +31,7 @@ class IngredientRecipesController < ApplicationController
 
     respond_to do |format|
       if @ingredient_recipe.save
-        format.html { redirect_to @ingredient_recipe, notice: 'Ingredient recipe was successfully created.' }
+        format.html { redirect_to @ingredient_recipe.recipe, notice: 'Ingredient recipe was successfully created.' }
         format.json { render :show, status: :created, location: @ingredient_recipe }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class IngredientRecipesController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient_recipe.update(ingredient_recipe_params)
-        format.html { redirect_to @ingredient_recipe, notice: 'Ingredient recipe was successfully updated.' }
+        format.html { redirect_to @ingredient_recipe.recipe, notice: 'Ingredient recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @ingredient_recipe }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class IngredientRecipesController < ApplicationController
   def destroy
     @ingredient_recipe.destroy
     respond_to do |format|
-      format.html { redirect_to ingredient_recipes_url, notice: 'Ingredient recipe was successfully destroyed.' }
+      format.html { redirect_to recipe_url(@ingredient_recipe.recipe), notice: 'Ingredient recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +72,6 @@ class IngredientRecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_recipe_params
-      params.require(:ingredient_recipe).permit(:recipe_id, :ingredient_id)
+      params.require(:ingredient_recipe).permit(:recipe_id, :ingredient_id, :quantity, :quantity_type)
     end
 end

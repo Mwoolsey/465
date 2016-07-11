@@ -1,6 +1,35 @@
-<h1>Editing Recipe</h1>
+<div id="user_nav">
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "link_to" %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+  <p class="alert"><%= alert %></p>
+  <p class="notice"><%= notice %></p>
+</div>
+<br>
+<div class="edit_recipe">
+  <h1>Editing Recipe</h1>
+  <%= render 'edit_form' %>
 
-<%= render 'edit_form' %>
-
-<%= link_to 'Show', @recipe %> |
-<%= link_to 'Back', recipes_path %>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+      <% @recipe.ingredient_recipes.each do |ir| %>
+	<tr>
+	  <td><%= Ingredient.find(ir.ingredient_id).name %></td>
+	  <td><%= ir.quantity %></td>
+	  <td><%= ir.quantity_type %></td>
+	  <td><%= link_to 'edit', edit_ingredient_recipe_path(ir) %></td>
+	  <td><%= link_to 'delete', ir, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Show', @recipe %> |
+  <%= link_to 'Back', list_path(current_user.id) %>
+</div>

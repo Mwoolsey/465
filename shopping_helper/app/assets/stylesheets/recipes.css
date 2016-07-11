@@ -1,0 +1,13 @@
+.recipe_show {
+  background-color: #ccffcc;
+  padding: 1em;
+  border-radius: 0.5em;
+  width: 25%;
+}
+
+.edit_recipe {
+  background-color: #ccffcc;
+  padding: 1em;
+  border-radius: 0.5em;
+  width: 20%;
+}

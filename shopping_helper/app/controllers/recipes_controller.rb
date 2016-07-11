@@ -10,10 +10,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @ingredients = []
-    @recipe.ingredients.each do |ingredient|
-      @ingredients << ingredient.name
-    end
+    @ingredient_recipes = @recipe.ingredient_recipes
+    #yikes
   end
 
   # GET /recipes/new
@@ -62,11 +60,21 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
+    lists = List.all
+
+    lists.each do |list|
+      index = list.recipes.find_index(@recipe)
+      if index != nil
+	list.recipes[index].destroy
+      end
+    end
+
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to list_path(current_user.id), notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
   private

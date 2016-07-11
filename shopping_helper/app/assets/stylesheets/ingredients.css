@@ -1,0 +1,48 @@
+.show_ingredient {
+  margin: 0;
+  position: absolute;
+  height: auto;
+  width: 50%;
+  left: 25%;
+}
+
+.inner_ingredient {
+  position: relative;
+  text-align: center;
+  background-color: #e6ffe6;
+  border-radius: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}
+
+.inner_ingredient h1 {
+  background-color: #ccffcc;
+  position: relative;
+  font-size: 4em;
+  border-style: solid;
+  border-radius: 0.2em;
+  width: 50%;
+  height: 2em;
+  left: 25%;
+  padding-top: 1em;
+}
+
+.center_ingredient {
+  background-color: #ccffcc;
+  position: relative;
+  border-style: groove;
+  border-radius: 0.5em;
+  width: 50%;
+  left: 25%;
+}
+
+.no_underline {
+  text-decoration: none;
+}
+
+.edit_ingredient {
+  background-color: #ccffcc;
+  padding: 1em;
+  border-radius: 0.5em;
+  width: 20%;
+}

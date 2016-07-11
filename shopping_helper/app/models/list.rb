@@ -7,6 +7,7 @@ class List < ActiveRecord::Base
   
   def recipes_not_used
     recipes = Recipe.all - self.recipes
-    recipes.map {|recipe| [recipe.name, recipe.id]}
+    recipes = recipes.map {|recipe| [recipe.name, recipe.id]}
+    recipes.sort_by {|x,y| x}
   end
 end

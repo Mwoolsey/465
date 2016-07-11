@@ -57,7 +57,6 @@ class ListsController < ApplicationController
     @all_ingredients = @all_ingredients.map {|i| [i.name, i.id]}
     @all_ingredients.sort_by! {|x,y| x}
     @unique_ingredients.sort_by! {|w,x,y,z| w}
-#yikes
   end
 
   # GET /lists/new
